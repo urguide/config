@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+
+
+
+# ---------------------------------------------------------------------
+
+# 新版 ble.sh (0.4.0+) 核心行為與外觀設定
+
+# ---------------------------------------------------------------------
+# 新版開啟自動補全 (同 zsh/fish 的即時灰色字體提示)
+#bleopt auto_complete=1
+# 新版設定自動補全的觸發延遲 (毫秒)
+#bleopt auto_complete_delay=50
+# 新版啟用選單式補全，按 Tab 可以用方向鍵選取項目
+#bleopt complete_menu=1
+# 新版高亮設定 (注意：新版面版名稱開頭移除了 region_)
+# 正確指令高亮 (淡藍)
+#ble-face -s command 'fg=81,bold'
+# 內建指令高亮 (亮藍)
+ble-face -s command_builtin 'fg=117'
+# 別名高亮 (淡綠)
+ble-face -s command_alias 'fg=121'
+# 函式高亮 (淡綠)
+ble-face -s command_function 'fg=121'
+# 目錄高亮 (底線天藍)
+ble-face -s filename_directory 'fg=45,underline'
+# 補全提示字體高亮 (灰色斜體)
+ble-face -s auto_complete 'fg=242,italic'
+# ---------------------------------------------------------------------
+
+# 新版按鍵綁定 (Key Bindings)
+
+# ---------------------------------------------------------------------
+
+# 新版右方向鍵 (→) 與 Ctrl+f 採用補全
+# 使用新版 widget 名稱：menu-filter/select-forward || auto_complete/insert
+#ble-bind -f 'right' 'menu-filter/select-forward || auto_complete/insert'
+#ble-bind -f 'C-f' 'auto_complete/insert'
+# 新版歷史紀錄子字串搜尋 (按 Up/Down 根據已輸入字元搜尋歷史)
+function ble/widget/my/history-search-backward-end {
+  ble/widget/history-search-backward
+  ble/widget/end-of-line
+}
+function ble/widget/my/history-search-forward-end {
+  ble/widget/history-search-forward
+  ble/widget/end-of-line
+}
+#ble-bind -m emacs -f 'up'   history-nsearch-backward
+#ble-bind -m emacs -f 'down' history-nsearch-forward
+#ble-bind -m emacs -f 'up'   my/history-search-backward-end
+#ble-bind -m emacs -f 'down' my/history-search-forward-end
+ble-bind -f 'up' 'history-prev'
+ble-bind -f 'down' 'history-next'
+bleopt history_default_point=end-of-line
+bleopt history_erasedups_limit=2000 
+
+# ---------------------------------------------------------------------
+
+# 補全 (Completion)
+
+# ---------------------------------------------------------------------
+# ble.sh 沒有自己的大小寫開關，而是讀取 readline 的 completion-ignore-case
+# (見 /usr/share/blesh/lib/core-complete.sh:4991)
+# 開啟後補全的候選產生、glob、共同前綴、選單過濾都會忽略大小寫
+# 注意：必須用 bind (ble.sh 覆寫的 wrapper)，用 builtin bind 無效
+bind 'set completion-ignore-case on'

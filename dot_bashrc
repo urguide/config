@@ -1,0 +1,373 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# ============================================
+# 1. ble.sh 載入(必須在最開頭,但先不 attach)
+# ============================================
+[[ $- == *i* ]] && source /usr/share/blesh/ble.sh --noattach --rcfile "$HOME/.blerc"
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/tom/opt/google-cloud-sdk/path.bash.inc' ]; then . '/home/tom/opt/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/tom/opt/google-cloud-sdk/completion.bash.inc' ]; then . '/home/tom/opt/google-cloud-sdk/completion.bash.inc'; fi
+
+source /home/tom/.config/mykey.env
+
+
+
+#alias chrome='nohup google-chrome-stable 2>&1 > /dev/null &'
+alias vi='vim'
+alias mc='. /usr/lib/mc/mc-wrapper.sh -d'
+#alias t='myTitle=$myTitle tmux a -t $(tmux ls | awk -F: '{print $1}'| head -n 1) || tmux'
+#alias t='myTitle=$myTitle tmux'
+#tmux改用function
+#alias t='tmux ls && tmux new-session -d && tmux new-window && tmux new-window && tmux new-window && tmux new-window && tmux select-window -t 1 && tmux a || tmux a || tmux'
+alias tk='tmux kill-server'
+alias s='tmux setenv myTitle "$myTitle";tmux setenv myContext "$myContext";tmux splitw -h'
+alias tp='telepresence'
+alias tpc='telepresence quit -s;telepresence --context $myContext connect'
+alias tpq='telepresence quit -s'
+alias v='vifm .'
+alias x='xplr'
+alias b='broot'
+alias c='wl-copy -n'
+alias pa='wl-paste -n'
+alias p='podman'
+alias q='qalc'
+alias r='reset'
+alias d2='dirs -v && read index && let "index=$index+0" && cd ~"$index" && let "index=$index+1" && popd -q +"$index"'
+alias cat='bat -p --theme ansi'  ##有些distro是用batcat  順便設定theme
+alias pstop='podman stop -t 1'
+alias docker='podman'  # --cgroup-manager=cgroupfs --events-backend=file
+alias td='sudo tailscale down'
+alias mi='mirrord exec --context $myContext --'
+##mac用'. /opt/homebrew/Cellar/midnight-commander/*/libexec/mc/mc-wrapper.sh -u -d'  加上-u可以加速開啟速度-u, -d不使用mouse模式, --nosubshell  不支援使用次殼層 (subshell)
+alias gst='git status'
+alias gp='git push'
+alias gl='git pull'
+alias gco='git checkout'
+alias g='git pull'
+alias vd='vimdiff'
+alias kns='kubectl config set-context --current --namespace '
+alias rz='find . -name "*:Zone.Identifier" -delete'
+#alias y='paru -Syu'
+alias yy='yazi'
+alias mc='CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1 claude --add-dir /home/tom/git/ai/infra-team --model opus'
+alias mca='CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1 claude --add-dir /home/tom/git/ai/infra-team --permission-mode auto --model opus'
+alias cc='cclimits --claude --codex --oneline'
+alias ccc='cclimits --claude --oneline'
+alias cco='cclimits --codex --oneline'
+alias ccg='cclimits --antigravity --oneline'
+alias ls='eza --icons --group-directories-first'
+alias ll='eza -l --icons --group-directories-first --git'
+alias la='eza -la --icons --group-directories-first --git'
+alias lt='eza --tree --icons --level=2'
+
+alias it='tmux set -p @myTitle "  IT  " && sudo su - it'
+
+export EDITOR="vim"
+export VISUAL="vim"
+
+PODMAN_USERNS=auto    ####讓podman自動用不同的user id跑container
+
+#  實作 extract 功能 (直接貼上，不需要外掛)
+extract() {
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2)   tar xjf $1     ;;
+            *.tar.gz)    tar xzf $1     ;;
+            *.bz2)       bunzip2 $1     ;;
+            *.rar)       unrar x $1     ;;
+            *.gz)        gunzip $1      ;;
+            *.tar)       tar xf $1      ;;
+            *.tbz2)      tar xjf $1     ;;
+            *.tgz)       tar xzf $1     ;;
+            *.zip)       unzip $1       ;;
+            *.Z)         uncompress $1  ;;
+            *.7z)        7z x $1        ;;
+            *)           echo "'$1' cannot be extracted via extract()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+a() { ## ##google切換帳號
+  gcloud config configurations activate ${1:-default}
+}
+
+weather() {
+curl https://wttr.in/$1
+}
+
+pw() {
+    local length=${1:-20}
+    local mode=${2:-}                 # 第二參數給 nosym(或 n)就不放符號
+
+    local sympool='_!@#$%^&*()+=-'    # - 放最後 → 才是字面減號
+    local upper lower digit symbol guaranteed pool others password
+
+    upper=$(tr -dc 'A-Z' < /dev/urandom | head -c1)
+    lower=$(tr -dc 'a-z' < /dev/urandom | head -c1)
+    digit=$(tr -dc '0-9' < /dev/urandom | head -c1)
+
+    if [[ $mode == n* ]]; then
+        pool='A-Za-z0-9'
+        guaranteed="$upper$lower$digit"
+    else
+        symbol=$(tr -dc "$sympool" < /dev/urandom | head -c1)
+        pool="A-Za-z0-9$sympool"
+        guaranteed="$upper$lower$digit$symbol"
+    fi
+
+    # 防呆:length 不能小於必選字元數,否則 head -c 變負數會 hang 住
+    if (( length < ${#guaranteed} )); then
+        echo "length 至少要 ${#guaranteed}" >&2
+        return 1
+    fi
+
+    others=$(tr -dc "$pool" < /dev/urandom | head -c $((length - ${#guaranteed})))
+    password=$(printf '%s' "$guaranteed$others" \
+        | fold -w1 | shuf --random-source=/dev/urandom | tr -d '\n')
+    echo "$password" | tee /dev/tty | wl-copy -n
+}
+
+t() {
+    local _myWS="/home/tom/work-yile"
+
+    if [ $# -eq 0 ]; then
+        if ! tmux ls > /dev/null 2>&1; then
+            tmux new-session -c "$_myWS" -d
+            for ttt in {1..7}; do
+                tmux new-window -c "$_myWS"
+            done
+            tmux select-window -t 1
+        fi
+        tmux a -t "$(tmux ls | awk -F: '{print $1}' | head -n 1)"
+    else
+        tmux "$@"
+    fi
+}
+
+mpvl() {
+mpv --shuffle --volume=80 --geometry=600 --playlist=${1:-$HOME/pl.txt}
+}
+
+k () {
+        . k $@
+}
+
+kt() {
+echo "$myContext"
+kubetail $@ -k pod -t "$myContext"
+}
+kta() {
+echo "$myContext"
+kubetail -k pod -t "$myContext" -s 5m $@ | grep --color=always -i -E 'error|excep'
+}
+
+st() {
+echo "$myContext"
+sleep 1
+[ -z $myContext ] && echo "Need k8s Context" && return
+stern -s 5m --tail 1000 --context $myContext --max-log-requests 999 --only-log-lines -H error -H excep --timestamps=short --exclude-container istio-proxy --exclude-container istio-init $@
+}
+sta() {
+stern . -s 5m --tail 300 --context $myContext --max-log-requests 999 --only-log-lines  -H error -H excep --timestamps=short -i error -i excep $@
+}
+
+## zookeeper gui
+zoo() {
+podman run --rm \
+  -d \
+  -p 9000:9000 \
+  -v /etc/resolv.conf:/etc/resolv.conf \
+  -e HTTP_PORT=9000 \
+  --name zoonavigator \
+  elkozmon/zoonavigator:latest
+sleep 3
+google-chrome-stable http://127.0.0.1:9000
+}
+
+##快速切換最近使用的資料夾
+d() {
+if [[ -n $1 ]]
+then
+  dirs -v
+  read choice
+  dirs -v | grep -w $choice | awk '{print $2}' | sed 's#^~/#'$HOME'/#g' >> /home/tom/work-yile/txt_tmp/dirs_list.txt
+
+else
+  dArray=( $(dirs -v | awk '{print $2}' | sed 's#^~/#'$HOME'/#g' ) )
+  while IFS= read -r line; do
+    dArray+=("$line")
+    #echo "[$count] $line"
+    #count=$((count + 1))
+  done <<<$(cat /home/tom/work-yile/txt_tmp/dirs_list.txt)
+
+  dArray=( $(echo "${dArray[@]}" | tr ' ' '\n' | sort -u ) )
+  
+  count=1
+  for line in ${dArray[@]}
+  do
+    echo "[$count] $line"
+    count=$((count + 1))
+  done
+
+  read dir_choice
+  cd ${dArray[$dir_choice]}
+fi
+}
+
+##提醒時鐘  ding 10m 提醒文字
+##或是用精準時間  ding 14:08 提醒文字
+ding() {
+    local input=$1
+    local msg=${2:-"時間到！"} # 如果沒給第二個參數，預設顯示「時間到！」
+    local sound="/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga"
+
+    # 定義執行動作：發通知 + 播聲音
+    local action="notify-send '鬧鐘' '$msg' -u critical -t 0 -i alarm && paplay $sound"
+
+    # 判斷格式
+    if [[ $input =~ ^[0-9]+[smh]$ ]]; then
+        # 格式如 5m, 10s, 1h -> 使用 sleep
+        echo "已設定倒數計時：$input 後提醒您"
+        (sleep $input && eval "$action") &
+    elif [[ $input =~ ^[0-9]{1,2}:[0-9]{2}$ ]]; then
+        # 格式如 14:00 -> 使用 at
+        echo "$action" | at $input
+        echo "已設定定時鬧鐘：將在 $input 提醒您"
+    else
+        echo "格式錯誤！請使用 5m (倒數) 或 14:00 (定時)"
+        echo "範例：ding 5m '泡麵好了' 或 ding 15:30 '開會'"
+    fi
+}
+
+
+
+##curl response time
+ct() {
+    while true;do printf "%.3fms\n" $(( $(curl -o /dev/null -s -w '%{time_total}' $1) * 1000 ));sleep 1;done
+}
+
+ct2() {
+URL="$1"
+[ "$2" != "" ] && RESOLVE="--resolve $2"
+
+while true; do
+curl -o /dev/null -s -w \
+"DNS Resolve: %{time_namelookup}\n\
+Client -> Server(TCP Established): %{time_connect}\n\
+SSL Handshake Done: %{time_appconnect}\n\
+Redirect Time: %{time_redirect}\n\
+Wait: %{time_pretransfer}\n\
+Server Respon(TTFB): %{time_starttransfer}\n\
+Total time: %{time_total}\n
+Speed: %{speed_download}\n" \
+$RESOLVE "${URL}"
+echo "========================"
+sleep 1
+done
+}
+
+ct3() {
+URL="$1"
+curl -s -o /dev/null -w "DNS 解析: %{time_namelookup}s\n建立連線: %{time_connect}s\nTLS 握手: %{time_appconnect}s\n開始傳輸: %{time_starttransfer}s\n--- \n總時間: %{time_total}s\n" $URL
+
+}
+
+
+##這是給pyenv用的   參考https://github.com/pyenv/pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+
+##安裝pyenv之後, 就吃預設的python版本
+export CLOUDSDK_PYTHON="python"  ##查看目前gcloud用哪個python, gcloud info --format="value(basic.python_location)"
+##這是google要安裝的numpy之後, 要這參數
+export CLOUDSDK_PYTHON_SITEPACKAGES=1
+##kubectl 1.26之後, 第三方登入已經被移除, 要用第三方登入, gke-gcloud-auth-plugin, 不要安裝gcloud sdk的kubectl, 自己額外用brew install kubectl
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
+
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=numbers --line-range=:500 {} 2>/dev/null || cat {}'"
+export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -50'"
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+
+## FZF
+## shift+j/k可以上下
+export FZF_DEFAULT_OPTS="
+  --height 40%
+  --layout=reverse
+  --border
+  --bind=J:down,K:up
+"
+
+
+##bash調校
+## bash歷史指令紀錄
+export HISTSIZE=10000
+export HISTFILESIZE=50000
+# 忽略重複指令和開頭是空白的指令
+export HISTCONTROL=ignoreboth
+# 每筆指令加上時間戳(`history` 顯示時會看到)  不要加, 靠atuin就好
+# export HISTTIMEFORMAT='%F %T '
+
+# 清掉 /etc/bash.bashrc 注入的 title 指令，換成自己的
+unset PROMPT_COMMAND
+set_terminal_title() {
+    if [ -n "$myTitle" ]; then
+        echo -ne "\033]0;[${myTitle}]\a"
+    else
+        echo -ne "\033]0;${PWD##*/}\a"
+    fi
+}
+PROMPT_COMMAND=set_terminal_title
+PROMPT_COMMAND='printf "\033]2;%s\033\\" "${myTitle:-$(basename "$PWD")}"'
+
+title() {
+    tmux set -p @myTitle "$1"
+    export myTitle="$1"
+}
+
+
+# --- zoxide: z 跳目錄 / zi 互動式選 ---
+#eval "$(zoxide init bash --no-cmd)"
+eval "$(zoxide init bash)"
+
+# --- fzf: Ctrl+R 歷史 / Ctrl+T 檔案 / Alt+C 目錄 ---
+[ -f /usr/share/fzf/key-bindings.bash ] && source /usr/share/fzf/key-bindings.bash
+[ -f /usr/share/fzf/completion.bash ] && source /usr/share/fzf/completion.bash
+
+
+##最後靠atuin整合
+eval "$(atuin init bash --disable-up-arrow)"   ##也要放在ble中間
+
+##starship
+eval "$(starship init bash)"
+
+# ============================================
+# 4. ble.sh attach(必須在最後)
+# ============================================
+[[ ${BLE_VERSION-} ]] && ble-attach
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/tom/.local/bin:$PATH"
+export PATH="/home/tom/.local/bin:$PATH"
+
+# WSL: no interop, so "open a browser" copies the URL to the Windows clipboard instead
+export BROWSER="$HOME/.local/bin/wsl-browser"
