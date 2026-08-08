@@ -1,3 +1,13 @@
 {{ if ne .chezmoi.os "windows" }}
 AppData/
 {{ end }}
+
+{{ if ne .chezmoi.os "linux" }}
+.config/zed/
+{{ end }}
+
+{{ if eq .chezmoi.username "it" }}
+.config/starship.toml
+.config/rclone/rclone.conf
+.git-credentials
+{{ end }}
