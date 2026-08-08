@@ -1,0 +1,126 @@
+{
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.columnSelection": false,
+    "remote.extensionKind": {
+        "ms-azuretools.vscode-docker": "workspace"
+    },
+    "editor.formatOnType": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "workbench.iconTheme": "vscode-icons",
+    "powermode.customCss": {
+        "powermode.enabled": true
+    },
+    "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\wsl.exe",
+    "remote.SSH.configFile": "D:\\yile_google_drive\\work\\vscode-ssh-list.txt",
+    "git.enableSmartCommit": true,
+    "git.showPushSuccessNotification": true,
+    "remote.SSH.remotePlatform": {
+        "local-centos": "linux",
+        "qa2-monitor": "linux",
+        "IT-infra": "linux",
+        "elk": "linux"
+    },
+    "python.languageServer": "Pylance",
+    "files.associations": {
+        "Jenkinsfile*": "groovy",
+        "*.groovy": "groovy"
+    },
+    "git.ignoreLegacyWarning": true,
+    "editor.fontFamily": "VictorMono NF",
+    "terminal.integrated.fontFamily": "VictorMono NF",
+    "editor.insertSpaces": false,
+    "editor.fontLigatures": false,
+    "editor.fontSize": 16,
+    "window.zoomLevel": 1,
+    "terminal.integrated.fontSize": 15,
+    "terminal.integrated.shell.linux": "/bin/zsh",
+    "files.autoGuessEncoding": false,
+    "workbench.preferredDarkColorTheme": "Cobalt2",
+    "vsicons.dontShowNewVersionMessage": true,
+    "[shellscript]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format"
+    },
+    "workbench.startupEditor": "none",
+    "editor.autoClosingBrackets": "never",
+    "git.autofetch": true,
+    "explorer.confirmDelete": false,
+    "unotes.editor.convertPastedImages": true,
+    "explorer.confirmDragAndDrop": false,
+    "markdown.extension.preview.autoShowPreviewToSide": true,
+    "markdown.extension.print.theme": "dark",
+    "git.mergeEditor": true,
+    "editor.lineNumbers": "relative",
+    "redhat.telemetry.enabled": false,
+    "editor.fontWeight": "normal",
+    "html.format.contentUnformatted": "",
+    "amVim.mimicVimSearchBehavior": false,
+    "amVim.startInInsertMode": true,
+    "amVim.useSystemClipboard": true,
+    "git.confirmSync": false,
+    "gitlens.views.commitDetails.files.layout": "tree",
+    "git.rememberPostCommitCommand": true,
+    "amVim.bindCtrlCommands": false,
+    "editor.minimap.enabled": false,
+    "extensions.ignoreRecommendations": true,
+    "gitlens.showWelcomeOnInstall": false,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "scm.defaultViewSortKey": "name",
+    "git.ignoreRebaseWarning": true,
+    "saveCommitSync.saveCommitAndSyncButtonSavesSingleFile": true,
+    "git.postCommitCommand": "sync",
+    "git.replaceTagsWhenPull": true,
+    "editor.renderWhitespace": "trailing",
+    "editor.fontVariations": false,
+    "editor.inlineSuggest.fontFamily": "'Victor Mono','Victor Mono','Victor Mono'",
+    "workbench.colorTheme": "Solarized Light",
+    "typescript.tsserver.watchOptions": "vscode",
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": [
+                    //following will be in italic (=FlottFlott)
+                    "comment"
+                ],
+                "settings": {
+                    "fontStyle": "" //italic  bold   underline   什麼都不加就是一般字
+                }
+            },
+            {
+                "scope": [
+                    //following will be excluded from italics (VSCode has some defaults for italics)
+                    "invalid",
+                    "keyword.operator",
+                    "constant.numeric.css",
+                    "keyword.other.unit.px.css",
+                    "constant.numeric.decimal.js",
+                    "constant.numeric.json",
+                    "entity.name.type.class", //class names
+                    "keyword", //import, export, return…
+                    "constant", //String, Number, Boolean…, this, super
+                    "storage.modifier", //static keyword
+                    "storage.type.class.js", //class keyword
+                ],
+                "settings": {
+                    "fontStyle": ""
+                }
+            }
+        ]
+    },
+    "security.workspace.trust.untrustedFiles": "open",
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false
+    },
+    "claudeCode.preferredLocation": "panel",
+    "editor.minimap.sectionHeaderFontSize": 12,
+    "terminal.integrated.commandsToSkipShell": [
+        "kilo-code.new.agentManagerOpen",
+        "kilo-code.new.agentManager.showTerminal"
+    ],
+    "workbench.auxiliaryActivityBar.location": "default",
+    "dev.containers.dockerPath": "podman",
+    "editor.dropIntoEditor.preferences": []
+}
