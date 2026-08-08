@@ -8,6 +8,8 @@ AppData/
 
 {{ if eq .chezmoi.username "it" }}
 .config/starship.toml
+.cinfog/systemd/user/*
 .config/rclone/rclone.conf
 .git-credentials
+.bashrc
 {{ end }}
