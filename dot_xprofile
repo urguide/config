@@ -1,0 +1,5 @@
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx    ###kde6似乎只需要這一個, 然後去虛擬鍵盤改成fcitx
+export SDL_IM_MODULE=fcitx
+export INPUT_METHOD=fcitx
