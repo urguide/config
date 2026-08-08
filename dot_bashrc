@@ -363,9 +363,4 @@ eval "$(starship init bash)"
 [[ ${BLE_VERSION-} ]] && ble-attach
 
 
-# Added by Antigravity CLI installer
-export PATH="/home/tom/.local/bin:$PATH"
-export PATH="/home/tom/.local/bin:$PATH"
-
-# WSL: no interop, so "open a browser" copies the URL to the Windows clipboard instead
-export BROWSER="$HOME/.local/bin/wsl-browser"
+[ -f $HOME/.myshellrc ] && source $HOME/.myshellrc
