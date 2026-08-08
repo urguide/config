@@ -6,9 +6,10 @@ AppData/
 .config/zed/
 {{ end }}
 
-{{ if eq .chezmoi.username "it" }}
+{{ if ne .chezmoi.username "tom" }}
 .config/starship.toml
 .cinfog/systemd/user/*
 .config/rclone/rclone.conf
 .git-credentials
+.myshellrc
 {{ end }}
