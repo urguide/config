@@ -1,0 +1,33 @@
+[Unit]
+Description=Rclone onedrive urguide
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/rclone mount \
+  --vfs-cache-mode full \
+  --dir-cache-time 24h \
+  --poll-interval 1m \
+  --buffer-size 64M \
+  --vfs-read-ahead 128M \
+  --vfs-read-chunk-size 64M \
+  --vfs-read-chunk-size-limit 2G \
+  --vfs-cache-max-age 9999d \
+  --vfs-cache-max-size 100G \
+  --attr-timeout 20s \
+  --onedrive-chunk-size 250Mi \
+  --onedrive-delta \
+  --user-agent "ISV|rclone.org|rclone/v1.71" \
+  --tpslimit 10 \
+  --tpslimit-burst 20 \
+  --cache-dir=/home/tom/opt/rclone_cache \
+  --rc \
+  --log-level INFO \
+  --log-file /home/tom/rclone-mount.log \
+  onedrive_urguide:/ /home/tom/onedrive
+ExecStop=/bin/fusermount -uz /home/tom/onedrive
+Type=notify
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,16 @@
+[Unit]
+Description=Rclone onedrive-vick81915
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/rclone mount \
+--vfs-cache-mode off \
+--cache-dir=/home/tom/opt/rclone_cache \
+onedrive_vick81915:/  /home/tom/cloud_storage/onedrive_vick81915
+ExecStop=/bin/fusermount -uz /home/tom/cloud_storage/onedrive_vick81915
+Type=notify
+
+[Install]
+WantedBy=default.target

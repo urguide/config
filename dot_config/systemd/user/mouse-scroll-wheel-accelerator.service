@@ -1,0 +1,10 @@
+
+[Unit]
+Description=Mouse scroll wheel accelerator
+[Install]
+WantedBy=default.target
+[Service]
+ExecStart=/home/tom/.pyenv/shims/python3 /home/tom/opt/mouse-scroll-wheel-acceleration-userspace/main.py
+Type=simple
+Restart=on-failure
+RestartSec=20s

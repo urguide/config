@@ -1,0 +1,20 @@
+[Unit]
+Description=Rclone google urguide
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/rclone mount \
+--vfs-cache-mode full \
+--dir-cache-time 24h \
+--vfs-cache-max-age=300d \
+--cache-dir=/home/tom/opt/rclone_cache \
+--vfs-read-chunk-size 128M \
+--buffer-size 64M \
+google_urguide_enc:/  /home/tom/google-urguide
+ExecStop=/bin/fusermount -uz /home/tom/google-urguide
+Type=notify
+
+[Install]
+WantedBy=default.target

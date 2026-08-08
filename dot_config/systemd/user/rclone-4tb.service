@@ -1,0 +1,15 @@
+[Unit]
+Description=Rclone 4tb
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/rclone mount  \
+--log-file /tmp/rclone-4tb.log \
+pi_4tb:/mnt/4tb  /home/tom/4tb
+ExecStop=/bin/fusermount -uz /home/tom/4tb
+Type=notify
+
+[Install]
+WantedBy=default.target

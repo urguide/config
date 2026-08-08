@@ -1,0 +1,22 @@
+[Unit]
+Description=Rclone 26tb
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/rclone mount  \
+  --log-file /tmp/rclone-26tb.log \
+  --dir-cache-time 10s \
+  --vfs-cache-mode writes \
+  --cache-dir /home/tom/opt/rclone_cache \
+  --vfs-cache-max-age 1m \
+  --vfs-cache-poll-interval 1m \
+  --vfs-cache-max-size 50G \
+  --bwlimit-file 100M \
+pi_26tb:/mnt/26tb_raid1/mydata/tom  /home/tom/26tb
+ExecStop=/bin/fusermount -uz /home/tom/26tb
+Type=notify
+
+[Install]
+WantedBy=default.target

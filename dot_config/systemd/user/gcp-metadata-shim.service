@@ -1,0 +1,14 @@
+[Unit]
+Description=Local metadata shim feeding tom-dev tokens to SDK tools
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /usr/local/bin/gcp-metadata-shim.py
+Environment=SHIM_HOST=127.0.0.1
+Environment=SHIM_PORT=33333
+Environment=TOKEN_FILE=/var/tmp/gcp-token/token
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
