@@ -1,0 +1,81 @@
+# starship 設定
+# 完整文件: https://starship.rs/config/
+
+# 加快 prompt 速度
+#command_timeout = 1000
+
+add_newline = false
+
+# 左側 Prompt
+format = """
+$env_var\
+$hostname\
+$directory\
+[](fg:#89b4fa bg:#a6e3a1)\
+$git_branch\
+$git_status\
+[](fg:#a6e3a1)\
+$character"""
+
+# 右側 Prompt
+right_format = """
+[](fg:#f9e2af)\
+$cmd_duration\
+[](fg:#94e2d5 bg:#f9e2af)\
+$time"""
+
+[env_var.SSH_CONNECTION]
+format = "[SSH@]($style)"
+style = "bg:#f38ba8 fg:#1e1e2e bold"
+disabled = false
+
+[hostname]
+ssh_only = true
+format = "[$hostname]($style)[](fg:#f38ba8 bg:#89b4fa)"
+style = "bg:#f38ba8 fg:#1e1e2e bold"
+disabled = false
+
+[directory]
+style  = "bg:#89b4fa fg:#1e1e2e bold"
+format = "[ $path ]($style)"
+truncation_length = 3
+
+[git_branch]
+symbol = " "
+style  = "bg:#a6e3a1 fg:#1e1e2e bold"
+# 移除結尾空格，讓 git_status 可以緊跟在後
+format = "[ $symbol$branch]($style)"
+
+[git_status]
+style = "bg:#a6e3a1 fg:#1e1e2e bold"
+# 關鍵：將每個狀態單獨定義為 "符號${count}"
+conflicted = "=${count} "
+ahead = "⇡${count} "
+behind = "⇣${count} "
+diverged = "⇕⇡${ahead_count}⇣${behind_count} "
+untracked = "?${count} "
+stashed = "$${count} "
+modified = "!${count} "
+staged = "+${count} "
+renamed = "»${count} "
+deleted = "✘${count} "
+
+# 格式設定：只顯示你定義好的這些狀態資訊
+format = "([ $all_status$ahead_behind]($style))"
+disabled = false
+
+[cmd_duration]
+min_time = 0
+style  = "bg:#f9e2af fg:#1e1e2e bold"
+format = "[$duration]($style)"
+
+[time]
+disabled = false
+time_format = "%R:%S"
+style = "bg:#94e2d5 fg:#1e1e2e bold"
+format = "[ $time ]($style)"
+
+[character]
+success_symbol = ""
+error_symbol   = "[❯](bold red)"
+
