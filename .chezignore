@@ -11,5 +11,4 @@ AppData/
 .cinfog/systemd/user/*
 .config/rclone/rclone.conf
 .git-credentials
-.bashrc
 {{ end }}
