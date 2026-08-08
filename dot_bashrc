@@ -70,6 +70,10 @@ alias ls='eza --icons --group-directories-first'
 alias ll='eza -l --icons --group-directories-first --git'
 alias la='eza -la --icons --group-directories-first --git'
 alias lt='eza --tree --icons --level=2'
+alias ci='chezmoi'
+alias ciu='chezmoi update --apply=false'
+alias cia='chezmoi add'
+alias ciae='chezmoi add --encrypt'
 
 alias it='tmux set -p @myTitle "  IT  " && sudo su - it'
 
@@ -285,12 +289,6 @@ curl -s -o /dev/null -w "DNS 解析: %{time_namelookup}s\n建立連線: %{time_c
 
 }
 
-
-##這是給pyenv用的   參考https://github.com/pyenv/pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
 
 ##安裝pyenv之後, 就吃預設的python版本
 export CLOUDSDK_PYTHON="python"  ##查看目前gcloud用哪個python, gcloud info --format="value(basic.python_location)"
