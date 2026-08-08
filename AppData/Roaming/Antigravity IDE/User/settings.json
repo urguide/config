@@ -1,0 +1,24 @@
+{
+    "workbench.colorTheme": "Cotion Theme",
+    "terminal.integrated.commandsToSkipShell": [
+        "kilo-code.new.agentManagerOpen",
+        "kilo-code.new.agentManager.showTerminal"
+    ],
+    "kilo-code.new.agentWorkStyle": "skipped",
+    "workbench.auxiliaryActivityBar.location": "default",
+    "claudeCode.preferredLocation": "panel",
+    "editor.fontFamily": "'VictorMono Nerd Font'",
+    "editor.fontWeight": "300",
+    "editor.fontSize": 16,
+    "editor.codeLensFontFamily": "'VictorMono Nerd Font'",
+    "editor.fontLigatures": false,
+    "git.autofetch": true,
+    "remote.autoForwardPortsSource": "hybrid",
+    "editor.codeActionsOnSave": {},
+    "git.postCommitCommand": "sync",
+    "git.confirmSync": false,
+    "git.rebaseWhenSync": true,
+    "editor.dropIntoEditor.preferences": [],
+    "git.blame.editorDecoration.enabled": true,
+    "kilo-code.new.autoApprove.enabled": false
+}
