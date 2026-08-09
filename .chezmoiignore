@@ -1,9 +1,11 @@
 {{ if ne .chezmoi.os "windows" }}
 AppData/
+AppData/**
 {{ end }}
 
 {{ if ne .chezmoi.os "linux" }}
 .config/zed/
+.config/zed/**
 {{ end }}
 
 {{ if ne .chezmoi.username "tom" }}
