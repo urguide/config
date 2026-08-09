@@ -6,12 +6,12 @@ set tabstop=2
 set laststatus=2
 set maxmempattern=20000  " 增加最大記憶體用量
 set expandtab  " tab改成空白
+set autoindent " 跟上一行的縮進一致
 set statusline=%<%f%m\ \|\ %{&ff}\ \|\ %{&fenc}\ \|\ %Y\ \|\ %{getcwd()}\ \ \ \ Line:%l\/%L\ Column:%c%V\ %P\ %=\[%{strftime('%Y/%b/%d\ %a\ %I:%M\ %p')}\]
 syntax on
 set t_Co=256
 set nu rnu  " 相對行數加上該行的行數 混和模式
 set encoding=utf8
-syntax on
 set background=dark   " 啟用暗色背景
 set showmatch         " 顯示括號配對情況
 "set rtp+=/opt/homebrew/opt/fzf " 使用fzf模糊搜尋
@@ -20,47 +20,28 @@ set virtualedit=block " ctrl+shift+v塊選擇時, 不會因為字行比較短就
 "區塊選擇之後, shift+i在最前面加入字, shift+a最後加字,打字時候只會看到單行, 打完之後按兩下esc就會套用
 highlight CursorLine cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
 set cursorline  " 突出顯示當前行(水平), 加上前面那行, 只高亮line number
-set background=dark
-colorscheme torte " solairized
+"set background=light " 亮色theme才用這個,配合solarized的亮色, 暗色是dark
+"colorscheme solarized " 亮色theme才用這個
+"colorscheme torte "dark theme可以用這個
 "  :help map-table可以看[nore]map對應表
 "nmap <silent> <C-\> :NERDTreeToggle<CR>  " C-\ 開啟/關閉nerdtree
 nnoremap <C-\> :NERDTreeToggle<CR>        " C-\ 開啟/關閉nerdtree  ##用nnoremap似乎比上面的nmap好
 nnoremap <F2> :set rnu! nu!<CR>  " 開啟/關閉行數號碼和相對號碼
-noremap <F3> :tabe.<CR> " 開啟新tabe並選擇檔案
+noremap <F3> :tabenew<CR> " 開啟新tab並開啟空的新檔案, 最後要:w aaa.txt存檔
 noremap t :tabe.<CR> " 開啟新tabe並選擇檔案
 map ] gt
 map [ gT
-nnoremap q :q <cr>   " 啟用暗色背景 " command mode時把q設定成跳出
+nnoremap q :q <cr> " command mode時把q設定成跳出
 "nnoremap ] :tabn<CR> " 這種方式同上gt gT
 "nnoremap [ :tabp<CR> " 這種方式同上gt gT
 "autocmd vimenter * NERDTree   " 自動啟動NERDTree
 
+nnoremap <leader>f :NERDTreeFind<CR>        " 在 NERDTree 裡定位當前檔案   <leader>就是\的意思, 所以就是\f
+nnoremap <leader>n :NERDTreeFocus<CR>       " 跳到 NERDTree 視窗  <leader>就是\的意思,  所以就是\n
 nnoremap <Tab>   :bnext<CR>  " 切換到開啟的下一個檔案
 nnoremap <S-Tab> :bprev<CR>  " 切換到開啟的上一個檔案
 set hidden     "這樣有東西未儲存時, 才可以在不同buffer之間切換
 
-" 貼東西就不會自動換行, 平常會自動換
-function! WrapForTmux(s)
-  if !exists('')
-    return a:s
-  endif
-
-  let tmux_start = "\<Esc>Ptmux;"
-  let tmux_end = "\<Esc>\"
-
-  return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
-endfunction
-
-let &t_SI .= WrapForTmux("\<Esc>[?2004h")
-let &t_EI .= WrapForTmux("\<Esc>[?2004l")
-
-function! XTermPasteBegin()
-  set pastetoggle=<Esc>[201~
-  set paste
-  return ""
-endfunction
-
-inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
 " === Plug ===
 call plug#begin('~/.vim/plugged')
@@ -69,11 +50,12 @@ Plug 'preservim/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'ap/vim-buftabline'
 
+call plug#end()
 " === NERDTree ===
 "autocmd VimEnter * NERDTree | wincmd p
-"autocmd BufEnter * if winnr('$') == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree() | quit | endif
+autocmd BufEnter * if winnr('$') == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree() | quit | endif
 
-command! B normal!:let @a=expand('%')<CR>:let @b=line('.')<CR>:new<CR>:set bt=nofile<CR>:%!git blame -wM <C-R>a<CR>:<C-R>b<CR><C-W>L
-nnoremap b :let @a=expand('%')<CR>:let @b=line('.')<CR>:new<CR>:set bt=nofile<CR>:%!git blame -wM <C-R>a<CR>:<C-R>b<CR><C-W>L
-nnoremap B :let @a=expand('%')<CR>:let @b=line('.')<CR>:new<CR>:set bt=nofile<CR>:%!git blame -wM <C-R>a<CR>:<C-R>b<CR>
-
+"查看git blame
+command! B normal!:let @a=expand('%')<CR>:let @b=line('.')<CR>:new<CR>:set bt=nofile<CR>:%!git blame -wM <C-R>a<CR>:<C-R>b<CR><C-W>L  " :B 執行叫出git blame畫面
+nnoremap b :let @a=expand('%')<CR>:let @b=line('.')<CR>:new<CR>:set bt=nofile<CR>:%!git blame -wM <C-R>a<CR>:<C-R>b<CR><C-W>L  " 熱鍵b執行叫出git blame畫面
+nnoremap B :let @a=expand('%')<CR>:let @b=line('.')<CR>:new<CR>:set bt=nofile<CR>:%!git blame -wM <C-R>a<CR>:<C-R>b<CR> " 熱鍵B執行叫出git blame畫面
