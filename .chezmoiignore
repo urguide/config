@@ -3,7 +3,7 @@ AppData/
 AppData/**
 {{ end }}
 
-{{ if ne .chezmoi.os "linux" }}
+{{ if ge .chezmoi.os "windows" }}
 .config/zed/
 .config/zed/**
 {{ end }}
