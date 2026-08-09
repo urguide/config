@@ -357,6 +357,11 @@ eval "$(atuin init bash --disable-up-arrow)"   ##也要放在ble中間
 ##starship
 eval "$(starship init bash)"
 
+## 開啟ssh-agent
+if [ -z "$SSH_AUTH_SOCK" ]; then
+   eval "$(ssh-agent -s)" > /dev/null
+fi
+
 # ============================================
 # 4. ble.sh attach(必須在最後)
 # ============================================
