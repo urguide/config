@@ -49,5 +49,176 @@
         }
       }
     }
+  },
+  "permission": {
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*.env.example": "allow",
+
+      "_script/wg_key*/**": "deny",
+      "_script/rd_sshkey/**": "deny",
+      "_script/_build_gcp_project/**/*-key.json": "deny",
+      "_script/add_secret_centre-config.yaml": "deny",
+      "istio_scg/certs/**": "deny",
+      "istio_scg/secret-istio.yaml": "deny",
+      "headscale/data/**": "deny",
+
+      "pro/envcheck/**": "deny",
+      "pro/*secret*.yaml": "deny",
+      "pro/docker-pull-cred.yaml": "deny",
+      "pro/additional-scrape-configs*.yaml": "deny",
+      "pro/temp.yaml": "deny",
+      "pro/diff/**": "deny",
+      "3.shell_script/single-dev-k8s/*.yaml": "deny",
+
+      "*.pem": "deny",
+      "*.p12": "deny",
+      "*private*.key": "deny",
+      "config": "deny",
+      "*/ssh/config": "deny",
+      "2.myexe/ssh_list/config": "deny",
+
+      ".kilo/worktrees/**": "deny",
+      ".kilocode/**": "deny"
+    },
+
+    "edit": {
+      "*": "allow",
+      "1.project-list": "ask",
+      "pro/**": "ask",
+      "2.myexe/**": "ask",
+      "update_version/**": "ask",
+      "cp_to_usr_bin.sh": "ask",
+      "7.crontab/**": "ask",
+      "home_use_crontab/**": "ask",
+
+      "_script/wg_key*/**": "deny",
+      "_script/rd_sshkey/**": "deny",
+      "_script/_build_gcp_project/**/*-key.json": "deny",
+      "istio_scg/certs/**": "deny",
+      "headscale/data/**": "deny",
+      "pro/envcheck/**": "deny",
+      "pro/*secret*.yaml": "deny",
+      "*.env": "deny",
+      "*.pem": "deny",
+      ".kilo/worktrees/**": "deny",
+      ".kilocode/**": "deny"
+    },
+
+    "bash": {
+      "*": "allow",
+
+      "kubectl apply *": "ask",
+      "kubectl create *": "ask",
+      "kubectl delete *": "ask",
+      "kubectl scale *": "ask",
+      "kubectl patch *": "ask",
+      "kubectl set *": "ask",
+      "kubectl edit *": "ask",
+      "kubectl rollout *": "ask",
+      "kubectl exec *": "ask",
+      "kubectl cp *": "ask",
+      "kubectl taint *": "ask",
+      "kubectl drain *": "ask",
+      "kubectl cordon *": "ask",
+      "kubectl * apply *": "ask",
+      "kubectl * delete *": "ask",
+      "kubectl * scale *": "ask",
+      "kubectl * patch *": "ask",
+      "kubectl * exec *": "ask",
+
+      "helm install *": "ask",
+      "helm upgrade *": "ask",
+      "helm uninstall *": "ask",
+      "helm rollback *": "ask",
+      "helm delete *": "ask",
+
+      "gcloud config set *": "ask",
+      "gcloud * delete *": "ask",
+      "gcloud * remove-iam-policy-binding *": "ask",
+      "gcloud * add-iam-policy-binding *": "ask",
+      "gcloud * set-iam-policy *": "ask",
+      "gcloud iam *": "ask",
+      "gcloud services enable *": "ask",
+      "gcloud services disable *": "ask",
+      "gcloud compute ssh *": "ask",
+
+      "gsutil rm *": "ask",
+      "gsutil * rm *": "ask",
+      "gsutil acl *": "ask",
+      "gsutil iam *": "ask",
+      "gsutil mv *": "ask",
+      "gsutil rsync *": "ask",
+
+      "argocd app sync *": "ask",
+      "argocd app delete *": "ask",
+      "argocd app set *": "ask",
+
+      "docker push *": "ask",
+      "./cp_to_usr_bin.sh*": "ask",
+      "bash cp_to_usr_bin.sh*": "ask",
+
+      "gcloud container clusters delete *": "deny",
+      "gcloud projects delete *": "deny",
+      "rm -rf /*": "deny",
+      "git push *": "ask",
+      "git commit *": "ask",
+      "git reset --hard*": "ask",
+      "git clean *": "ask",
+
+      "cat *.env": "deny",
+      "cat *.pem": "deny",
+      "cat _script/wg_key*": "deny",
+      "cat _script/rd_sshkey*": "deny",
+      "* _script/wg_key/config/*": "deny",
+      "* _script/rd_sshkey/*": "deny",
+      "* pro/envcheck/*": "deny",
+      "env": "deny",
+      "printenv*": "deny"
+    },
+
+    "external_directory": {
+      "*": "ask",
+      "/tmp/**": "allow",
+      "~/.kube/**": "ask",
+      "~/.config/gcloud/**": "deny",
+      "~/.ssh/**": "deny",
+      "/usr/bin/**": "ask",
+      "/usr/local/bin/**": "ask"
+    },
+
+    "webfetch": "allow",
+    "websearch": "allow",
+    "doom_loop": "ask"
+  },
+
+  "agent": {
+    "plan": {
+      "permission": {
+        "bash": {
+          "*": "allow",
+          "kubectl apply *": "deny",
+          "kubectl create *": "deny",
+          "kubectl delete *": "deny",
+          "kubectl scale *": "deny",
+          "kubectl patch *": "deny",
+          "kubectl * apply *": "deny",
+          "kubectl * delete *": "deny",
+          "kubectl * scale *": "deny",
+          "helm install *": "deny",
+          "helm upgrade *": "deny",
+          "helm uninstall *": "deny",
+          "gcloud * delete *": "deny",
+          "gcloud config set *": "deny",
+          "gsutil rm *": "deny",
+          "gsutil * rm *": "deny",
+          "argocd app sync *": "deny",
+          "docker push *": "deny",
+          "git push *": "deny"
+        }
+      }
+    }
   }
 }
