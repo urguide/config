@@ -74,6 +74,7 @@ alias ci='chezmoi'
 alias ciu='chezmoi update --apply=false'
 alias cia='chezmoi add'
 alias ciae='chezmoi add --encrypt'
+alias o='opencode'
 
 alias it='tmux set -p @myTitle "  IT  " && sudo su - it'
 
