@@ -362,10 +362,11 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
    eval "$(ssh-agent -s)" > /dev/null
 fi
 
+[ -f $HOME/.myshellrc ] && source $HOME/.myshellrc
+
 # ============================================
 # 4. ble.sh attach(必須在最後)
 # ============================================
 [[ ${BLE_VERSION-} ]] && ble-attach
 
 
-[ -f $HOME/.myshellrc ] && source $HOME/.myshellrc
