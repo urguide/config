@@ -1,21 +1,33 @@
-{{ if ne .chezmoi.os "windows" }}
-AppData/
+{{/* Trusted accounts that may receive secrets. Defined once so the two
+     guards below can never drift apart. */}}
+{{- $trusted := has .chezmoi.username (list "tom" "tomchi") -}}
+
+# ===== Windows: ignore everything, then whitelist =====
+# Note: "dir/**" also matches "dir" itself, and once a directory is ignored
+# chezmoi does not descend into it, so every wanted parent must be un-ignored.
+# Note: "!" excludes are global and beat ALL ignores regardless of order,
+# so the secret whitelist below must stay inside the username guard.
+{{ if eq .chezmoi.os "windows" }}
+*
+**
+!AppData
+!AppData/**
+{{ if $trusted }}
+!.ssh
+!.ssh/config
+!.git-credentials
+!.config
+!.config/rclone
+!.config/rclone/rclone.conf
+{{ end }}
+{{ else }}
+AppData
 AppData/**
 {{ end }}
 
-{{ if ge .chezmoi.os "windows" }}
-.config/
-.config/**
-.myshellrc
-.tmux.conf
-.vimrc
-.xprofile
-.bashrc
-{{ end }}
-
-{{ if ne .chezmoi.username "tom" }}
+{{ if not $trusted }}
 .config/starship.toml
-.cinfog/systemd/user/*
+.config/systemd/user/*
 .config/rclone/rclone.conf
 .git-credentials
 .myshellrc
