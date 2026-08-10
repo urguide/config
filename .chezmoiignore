@@ -4,8 +4,13 @@ AppData/**
 {{ end }}
 
 {{ if ge .chezmoi.os "windows" }}
-.config/zed/
-.config/zed/**
+.config/
+.config/**
+.myshellrc
+.tmux.conf
+.vimrc
+.xprofile
+.bashrc
 {{ end }}
 
 {{ if ne .chezmoi.username "tom" }}
