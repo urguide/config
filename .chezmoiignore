@@ -29,9 +29,9 @@ AppData/**
 .cli-proxy-api/config.yaml
 .config/starship.toml
 .config/systemd/user/*
-.config/rclone/rclone.conf
-.config/mykey.env
-.git-credentials
+.config/rclone/rclone.conf.age
+.config/mykey.env.age
+.git-credentials.age
 .myshellrc
 
 {{ end }}
