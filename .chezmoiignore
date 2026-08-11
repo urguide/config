@@ -26,6 +26,7 @@ AppData/**
 {{ end }}
 
 {{ if not $trusted }}
+.cli-proxy-api/config.yaml
 .config/starship.toml
 .config/systemd/user/*
 .config/rclone/rclone.conf
