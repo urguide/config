@@ -19,7 +19,7 @@ if [ -f '/opt/google-cloud-sdk/path.bash.inc' ]; then . '/opt/google-cloud-sdk/p
 # The next line enables shell command completion for gcloud.
 if [ -f '/opt/google-cloud-sdk/completion.bash.inc' ]; then . '/opt/google-cloud-sdk/completion.bash.inc'; fi
 
-source /home/tom/.config/mykey.env
+source $HOME/.config/mykey.env
 
 
 
@@ -60,8 +60,8 @@ alias kns='kubectl config set-context --current --namespace '
 alias rz='find . -name "*:Zone.Identifier" -delete'
 #alias y='paru -Syu'
 alias yy='yazi'
-alias mc='CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1 claude --add-dir /home/tom/git/ai/infra-team --model opus'
-alias mca='CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1 claude --add-dir /home/tom/git/ai/infra-team --permission-mode auto --model opus'
+alias mc='CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1 claude --add-dir $HOME/git/ai/infra-team --model opus'
+alias mca='CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1 claude --add-dir $HOME/git/ai/infra-team --permission-mode auto --model opus'
 alias cc='cclimits --claude --codex --oneline'
 alias ccc='cclimits --claude --oneline'
 alias cco='cclimits --codex --oneline'
@@ -213,7 +213,7 @@ if [[ -n $1 ]]
 then
   dirs -v
   read choice
-  dirs -v | grep -w $choice | awk '{print $2}' | sed 's#^~/#'$HOME'/#g' >> /home/tom/work-yile/txt_tmp/dirs_list.txt
+  dirs -v | grep -w $choice | awk '{print $2}' | sed 's#^~/#'$HOME'/#g' >> $HOME/work-yile/txt_tmp/dirs_list.txt
 
 else
   dArray=( $(dirs -v | awk '{print $2}' | sed 's#^~/#'$HOME'/#g' ) )
@@ -221,7 +221,7 @@ else
     dArray+=("$line")
     #echo "[$count] $line"
     #count=$((count + 1))
-  done <<<$(cat /home/tom/work-yile/txt_tmp/dirs_list.txt)
+  done <<<$(cat $HOME/work-yile/txt_tmp/dirs_list.txt)
 
   dArray=( $(echo "${dArray[@]}" | tr ' ' '\n' | sort -u ) )
   
