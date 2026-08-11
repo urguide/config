@@ -1,0 +1,12 @@
+
+
+export GCE_METADATA_HOST=127.0.0.1:33333
+export GCE_METADATA_ROOT=127.0.0.1:33333
+export GCE_METADATA_IP=127.0.0.1:33333
+export GOOGLE_CLOUD_PROJECT=yile-it
+unset GOOGLE_APPLICATION_CREDENTIALS
+rm -f ~/.config/gcloud/application_default_credentials.json
+# gcloud/kubectl 直接吃 token 檔(可選,it 若也用 gcloud)
+gcloud config set auth/access_token_file /var/tmp/gcp-token/token > /dev/null
+
+export CLOUDSDK_CORE_ACCOUNT="tom-dev@yile-it.iam.gserviceaccount.com"
