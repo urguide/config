@@ -30,6 +30,8 @@ AppData/**
 .config/starship.toml
 .config/systemd/user/*
 .config/rclone/rclone.conf
+.config/mykey.env
 .git-credentials
 .myshellrc
+
 {{ end }}
