@@ -81,6 +81,7 @@ alias ciae='chezmoi add --encrypt'
 alias o='opencode'
 
 alias it='tmux set -p @myTitle "  IT  " && sudo su - it'
+alias vp='tmux set -p @myTitle "  VP  " && sudo su - vp'
 
 export EDITOR="vim"
 export VISUAL="vim"
