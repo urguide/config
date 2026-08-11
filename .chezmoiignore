@@ -34,5 +34,5 @@ AppData/**
 .git-credentials.age
 .myshellrc
 .ssh/config.age
-
+.tmux.conf
 {{ end }}
