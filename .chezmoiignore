@@ -33,5 +33,6 @@ AppData/**
 .config/mykey.env.age
 .git-credentials.age
 .myshellrc
+.ssh/config.age
 
 {{ end }}
