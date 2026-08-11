@@ -29,7 +29,7 @@ AppData/**
 .cli-proxy-api
 .cli-proxy-api/config.yaml
 .config/starship.toml
-.config/systemd/user/*
+.config/systemd
 .config/rclone
 .config/rclone/rclone.conf.age
 .config/mykey.env.age
