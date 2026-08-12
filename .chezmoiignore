@@ -29,6 +29,10 @@
 {{ else }}
 AppData
 AppData/**
+Documents
+Documents/**
+Documents
+Documents/**
 {{ end }}
 
 {{ if not $trusted }}
