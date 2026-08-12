@@ -12,8 +12,10 @@
 **
 !AppData
 !AppData/**
+!Documents
 !Documents/PowerShell
 !Documents/PowerShell/**
+!Documents
 !Documents/WindowsPowerShell
 !Documents/WindowsPowerShell/**
 {{ if $trusted }}
