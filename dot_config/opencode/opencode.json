@@ -181,7 +181,10 @@
 
     "external_directory": {
       "*": "ask",
+      "/tmp": "allow",
       "/tmp/**": "allow",
+      "~/temp": "allow",
+      "~/temp/**": "allow",
       "~/.kube/**": "ask",
       "~/.config/gcloud/**": "deny",
       "~/.ssh/**": "deny",
