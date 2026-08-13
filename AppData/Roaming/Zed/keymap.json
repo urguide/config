@@ -48,6 +48,11 @@
     "bindings": {
       "ctrl-shift-4": ["task::Spawn", { "task_name": "git-pull" }]
     }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-shift-c": "workspace::CopyPath"
+    }
   }
 ]
-
