@@ -7,6 +7,14 @@
     "use_new_terminal": false
   },
   {
+    "label": "gl",
+    "command": "gl",
+    "args": ["$ZED_FILE"],
+    "use_new_terminal": false,
+    "reveal": "always",
+    "hide": "never"
+  },
+  {
     "label": "git-pull-all",
     "command": "gpa",
     "cwd": "$ZED_WORKTREE_ROOT",

@@ -54,5 +54,17 @@
     "bindings": {
       "ctrl-shift-c": "workspace::CopyPath"
     }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-shift-h": [
+        "task::Spawn",
+        {
+          "task_name": "gl",
+          "reveal_target": "center"
+        }
+      ]
+    }
   }
 ]
