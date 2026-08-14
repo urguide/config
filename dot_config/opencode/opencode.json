@@ -197,8 +197,6 @@
   "agent": {
     "explore": { "model": "mymymy/grok-4.5" },
     "general": { "model": "mymymy/grok-4.6" },
-    "gpt": { "model": "mymymy/gpt-5.6-sol" },
-    "claude": { "model": "mymymy/opus-5" },
     "plan": {
       "permission": {
         "bash": {
