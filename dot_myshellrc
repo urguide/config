@@ -10,3 +10,5 @@ rm -f ~/.config/gcloud/application_default_credentials.json
 gcloud config set auth/access_token_file /var/tmp/gcp-token/token --no-user-output-enabled &
 
 export CLOUDSDK_CORE_ACCOUNT="tom-dev@yile-it.iam.gserviceaccount.com"
+
+export XDG_RUNTIME_DIR="/run/user/$(id -u)"
