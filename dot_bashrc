@@ -51,6 +51,7 @@ alias td='sudo tailscale down'
 alias mi='mirrord exec --context $myContext --'
 ##mac用'. /opt/homebrew/Cellar/midnight-commander/*/libexec/mc/mc-wrapper.sh -u -d'  加上-u可以加速開啟速度-u, -d不使用mouse模式, --nosubshell  不支援使用次殼層 (subshell)
 alias gst='git status'
+alias gs='git switch'
 alias gp='git push'
 alias gco='git checkout'
 alias g='git pull'
