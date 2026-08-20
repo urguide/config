@@ -45,6 +45,19 @@
           "name": "gemini-3.5-flash-low"
         }
       }
+    },
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama",
+      "options": {
+        "baseURL": "http://localhost:11434/v1",
+        "apiKey": "ollama"
+      },
+      "models": {
+        "qwen3.8:27b": {
+          "name": "qwen3.8:27b"
+        }
+      }
     }
   },
   "permission": {
