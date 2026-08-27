@@ -38,7 +38,7 @@ alias tpq='telepresence quit -s'
 alias v='vifm .'
 alias x='xplr'
 alias b='broot'
-alias c='wl-copy -n'
+alias c='wl-copy -n --type text/plain'
 alias pa='wl-paste -n'
 alias p='podman'
 alias q='qalc'
@@ -149,7 +149,7 @@ pw() {
     others=$(tr -dc "$pool" < /dev/urandom | head -c $((length - ${#guaranteed})))
     password=$(printf '%s' "$guaranteed$others" \
         | fold -w1 | shuf --random-source=/dev/urandom | tr -d '\n')
-    echo "$password" | tee /dev/tty | wl-copy -n
+    echo "$password" | tee /dev/tty | wl-copy -n --type text/plain
 }
 
 t() {
@@ -376,5 +376,4 @@ fi
 # 4. ble.sh attach(必須在最後)
 # ============================================
 [[ ${BLE_VERSION-} ]] && ble-attach
-
 
