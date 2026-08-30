@@ -82,14 +82,23 @@ alias cia='chezmoi add'
 alias ciae='chezmoi add --encrypt'
 alias o='opencode'
 
-alias it='tmux set -p @myTitle "  IT  " && sudo -H \
-       --preserve-env=DISPLAY,WAYLAND_DISPLAY,PULSE_SERVER \
-       -u it \
-       $SHELL'
+#alias it='tmux set -p @myTitle "  IT  " && sudo -H \
+#       --chdir=/home/it \
+#       --preserve-env=DISPLAY,WAYLAND_DISPLAY,PULSE_SERVER \
+#       -u it \
+#       $SHELL'
 alias vp='tmux set -p @myTitle "  VP  " && sudo su - vp'
 
 export EDITOR="vim"
 export VISUAL="vim"
+
+it() {
+  tmux set -p @myTitle "  IT  " &&
+    sudo -H \
+      --preserve-env=DISPLAY,WAYLAND_DISPLAY,PULSE_SERVER \
+      -u it \
+      sh -c 'cd "$HOME" && exec "$SHELL"'
+}
 
 PODMAN_USERNS=auto    ####讓podman自動用不同的user id跑container
 
