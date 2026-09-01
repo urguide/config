@@ -1,0 +1,16 @@
+[Unit]
+Description=SearXNG for Open WebUI
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+Image=docker.io/searxng/searxng:latest
+ContainerName=searxng
+Network=open-webui.network
+Volume=/home/tom/podman/searxng:/etc/searxng
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
