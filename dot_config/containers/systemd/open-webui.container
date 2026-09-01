@@ -1,0 +1,22 @@
+[Unit]
+Description=Open WebUI
+After=network-online.target
+Wants=network-online.target
+After=searxng.service
+Wants=searxng.service
+
+[Container]
+Image=openwebui/open-webui:latest
+ContainerName=open-webui
+Network=open-webui.network
+PublishPort=3000:8080
+Volume=/home/tom/podman/open-webui:/app/backend/data
+Environment=ENABLE_WEB_SEARCH=true
+Environment=WEB_SEARCH_ENGINE=searxng
+Environment=SEARXNG_QUERY_URL=http://searxng:8080/search
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
