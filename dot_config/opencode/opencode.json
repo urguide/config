@@ -32,6 +32,9 @@
         "gpt-6-astra": {
           "name": "gpt-6-astra"
         },
+        "gpt-6-astra(max)": {
+          "name": "gpt-6-astra(max)"
+        },
         "claude-sonnet-5": {
           "name": "sonnet-5"
         },
