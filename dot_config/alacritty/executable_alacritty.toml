@@ -40,6 +40,11 @@ key = "Enter"
 mods = "Control"
 
 [[keyboard.bindings]]
+chars = "\u001B[13;5u"
+key = "NumpadEnter"
+mods = "Control"
+
+[[keyboard.bindings]]
 chars = "\u001B[5~"
 key = "K"
 mods = "Control"
