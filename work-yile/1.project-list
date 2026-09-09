@@ -1,0 +1,55 @@
+0 ground1 yille-cg001-g1 asia-east1-a cluster-1 http://g1-wg.yile808.com:8080
+1 qa1
+2 qa2 jumbo-slotrek-qa asia-east1 qa2 http://qa2-wg.yile808.com:8080
+3 qa3 jumbo-slotrek-qa asia-east1-a qa3 http://qa3-wg.yile808.com:8080
+4 qa3-2 jumbo-slotrek-qa asia-east1-a qa3 http://testvpn.yile808.com:8080
+5 stage yile-cg001-stage asia-east1 cg001-stage http://stage-wg.yile808.com:8080
+8 Pro-tw jumbo-production1 asia-east1 cg001-pro http://g1-wg.yile808.com:8080
+9 IT-sre yile-it asia-east1-a sre
+10 op-lab op-lab asia-east1-a op
+
+
+19 gp-middle zparqh asia-southeast1-a datalake
+20 gp-dev gp-dev-440107 asia-southeast1 gp-dev http://gp001-dev-vpn.xwautc.online:8080
+21 gp-qa1 gp-qa1 asia-southeast1 gp-qa1
+22 gp-qa2 gp-qa2 asia-southeast1 gp-qa2
+23 gp-stage1 gp001-stage1 asia-southeast1 gp-stage1
+24 gp-demo1 gp001-demo1 asia-southeast1 gp001-demo1
+25 gp-pro1 gp001-pro1 asia-southeast1 gp-pro1
+
+29 gp-it1 gp-it1 asia-east1-a it
+
+
+31 ma01-dev ma01-dev asia-east1-a ma01-dev
+32 ma01-qa ma01-qa asia-southeast1-a ma01-qa
+33 ma01-stage ma01-stage asia-southeast1-a ma01-stage
+34 ma01-pro ma01-pro asia-southeast1-a ma01-pro
+
+50 laki01-dev laki-dev-498105 asia-southeast1 dev
+51 laki-qa1 laki-qa1 asia-southeast1 qa1
+
+
+55 laki-it1 laki-it1 asia-southeast1 laki-it
+
+57 crypto-dev yile-crypto-dev asia-east1-c dev 
+58 crypto-qa yile-crypto-qa asia-east1-a crypto-qa 
+59 crypto-pro yile-crypto-pro asia-east1-a pro
+
+60 datalake-dev datalake-dev-507602 asia-east1-a datalake-dev-peering
+61 datalake-qa datalake-dev-507602 asia-east1-a datalake-qa
+62 stage-flink yile-cg001-stage asia-east1-a stage-flink
+63 flink-pro cg001-flink asia-east1 flink
+
+
+
+70 bu03-dev bu03-dev asia-east1-a dev
+71 bu03-qa bu03-qa asia-east1-a qa
+72 bu03-stage bu03-stage asia-east1-a stage
+73 bu03-pro bu03-pro asia-east1-a pro
+77 bu03-it bu03-it asia-east1-a it
+
+80 marketing marketing-468706 	asia-east1-a marketing
+81 boostprod boostprod 	asia-east1-a boostprod
+90 uba-pro uba-pro 	asia-east1-b trino
+100 minikube minikube minikube minikube
+
