@@ -382,6 +382,14 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
    eval "$(ssh-agent -s)" > /dev/null
 fi
 
+##hermes 輸入中文 + 正常顯示
+export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u)/bus"
+export GTK_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+hd() {
+    hermes desktop "$@"
+}
+
 [ -f $HOME/.myshellrc ] && source $HOME/.myshellrc
 
 # ============================================
