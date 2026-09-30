@@ -24,7 +24,7 @@ DevOps 工程師,主要負責:
 - 遇到 GCP、GKE、CI/CD、Cloudflare、GitLab 相關任務時,一律查 infra KB, 其他事情就跳過KB檢查.
 - 判斷 production 一律以 env 檔的 `IS_PROD` 欄位為準,**不從環境名稱推測**。
 - `IT-sre` 是 production。
-- `IS_PROD=true` → 唯讀。不執行任何寫入、刪除、變更操作。
+- `IS_PROD=true` → 唯讀。預設不執行任何寫入、刪除、變更操作,當下主動詢問,並做兩次確認,得到允許之後才能對prod環境做修改
 - `IS_PROD=false` → 已獲授權,可以修改。
 - 破壞性操作(刪除、覆寫、rollout、scale down 等)一律事先確認,不分環境。
 - 變更優先走版本控制:修改 repo 內 YAML → 建立 MR。避免直接 `kubectl edit` / `kubectl patch`。
