@@ -32,14 +32,14 @@
         "gpt-6-astra(max)": {
           "name": "gpt-6-astra(max)"
         },
-        "claude-sonnet-5.5(max)": {
-          "name": "sonnet-5.5(max)"
+        "claude-sonnet-5-5(max)": {
+          "name": "sonnet-5-5(max)"
         },
-        "claude-fable-5.1": {
-          "name": "fable-5.1"
+        "claude-fable-5-1": {
+          "name": "fable-5-1"
         },
-        "claude-opus-5.5(max)": {
-          "name": "opus-5.5(max)"
+        "claude-opus-5-5(max)": {
+          "name": "opus-5-5(max)"
         },
         "gemini-3.8-flash-high": {
           "name": "gemini-3.8-flash-high"
