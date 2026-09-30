@@ -14,20 +14,17 @@
         "apiKey": "{env:MY_CLI_PROXY_KEY}"
       },
       "models": {
-        "grok-4.6": {
-          "name": "grok-4.6"
-        },
-        "grok-4.7": {
-          "name": "grok-4.7"
+        "grok-4.7(max)": {
+          "name": "grok-4.7(max)"
         },
         "gpt-5.6-luna": {
-          "name": "gpt-5.6-luna"
+          "name": "gpt-6-luna"
         },
         "gpt-5.6-terra": {
-          "name": "gpt-5.6-terra"
+          "name": "gpt-6-terra"
         },
-        "gpt-5.6-sol": {
-          "name": "gpt-5.6-sol"
+        "gpt-5.6-sol(max)": {
+          "name": "gpt-6-sol(max)"
         },
         "gpt-6-astra": {
           "name": "gpt-6-astra"
@@ -35,14 +32,14 @@
         "gpt-6-astra(max)": {
           "name": "gpt-6-astra(max)"
         },
-        "claude-sonnet-5": {
-          "name": "sonnet-5"
+        "claude-sonnet-5.5(max)": {
+          "name": "sonnet-5.5(max)"
         },
         "claude-fable-5.1": {
           "name": "fable-5.1"
         },
-        "claude-opus-5": {
-          "name": "opus-5"
+        "claude-opus-5.5(max)": {
+          "name": "opus-5.5(max)"
         },
         "gemini-3.8-flash-high": {
           "name": "gemini-3.8-flash-high"
@@ -219,8 +216,8 @@
   },
 
   "agent": {
-    "explore": { "model": "mymymy/grok-4.5" },
-    "general": { "model": "mymymy/grok-4.6" },
+    "explore": { "model": "mymymy/grok-4.7" },
+    "general": { "model": "mymymy/grok-4.7" },
     "plan": {
       "permission": {
         "bash": {
