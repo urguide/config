@@ -50,8 +50,8 @@
 77 bu03-it bu03-it asia-east1-a it
 
 81 boostprod boostprod 	asia-east1-a boostprod
-90 uba-dev uba-dev 	asia-east1-a uba-dev
-91 uba-qa uba-qa 	asia-east1-a uba-qa
+90 uba-dev uba-dev-493310 	asia-east1-a uba-dev
+91 uba-qa uba-qa-493310 	asia-east1-a uba-qa
 94 uba-pro uba-pro 	asia-east1-b trino
 100 minikube minikube minikube minikube
 
