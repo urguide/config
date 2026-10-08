@@ -380,8 +380,34 @@ eval "$(atuin init bash --disable-up-arrow)"   ##也要放在ble中間
 eval "$(starship init bash)"
 
 ## 開啟ssh-agent
-if [ -z "$SSH_AUTH_SOCK" ]; then
-   eval "$(ssh-agent -s)" > /dev/null
+#if [ -z "$SSH_AUTH_SOCK" ]; then
+#   eval "$(ssh-agent -s)" > /dev/null
+#fi
+if [[ -n ${TMUX:-} ]]; then
+    (
+        # 避免多個 window 同時建立 agent
+        tmux wait-for -L bashrc-ssh-agent || exit
+        trap 'tmux wait-for -U bashrc-ssh-agent' EXIT
+
+        # 優先使用 tmux 保存的 agent
+        agent_env=$(tmux show-environment -g SSH_AUTH_SOCK 2>/dev/null)
+        if [[ $agent_env == SSH_AUTH_SOCK=* ]]; then
+            export "$agent_env"
+        fi
+
+        # 0：有金鑰；1：沒有金鑰；2：無法連線
+        agent_status=0
+        ssh-add -l >/dev/null 2>&1 || agent_status=$?
+
+        if (( agent_status > 1 )); then
+            eval "$(ssh-agent -s)" >/dev/null
+        fi
+
+        tmux set-environment -g SSH_AUTH_SOCK "$SSH_AUTH_SOCK"
+    )
+
+    # 套用到目前 window 的 shell
+    export "$(tmux show-environment -g SSH_AUTH_SOCK)"
 fi
 
 ##hermes 輸入中文 + 正常顯示
