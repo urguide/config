@@ -41,10 +41,20 @@
           "name": "gpt-sol(max)"
         },
         "gpt-6-astra": {
-          "name": "gpt-astra"
+          "name": "gpt-astra",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
         },
         "gpt-6-astra(max)": {
-          "name": "gpt-astra(max)"
+          "name": "gpt-astra(max)",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
         },
         "claude-sonnet-5-5(max)": {
           "name": "sonnet(max)"
@@ -80,5 +90,17 @@
   "agent": {
     "explore": { "model": "mymymy/grok-4.7" },
     "general": { "model": "mymymy/grok-4.7" }
+  },
+  "mcp": {
+    "blender": {
+      "type": "local",
+      "command": ["uvx", "mcp-for-blender"],
+      "enabled": true,
+      "environment": {
+        "BLENDER_HOST": "10.1.1.8",
+        "BLENDER_PORT": "9876",
+        "BLENDER_MCP_SAFE_MODE": "1"
+      }
+    }
   }
 }
