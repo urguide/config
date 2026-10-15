@@ -63,7 +63,7 @@ DevOps 工程師,主要負責:
 遇到 GCP、GKE、CI/CD、Cloudflare、GitLab 相關任務時,一律查 infra KB, 其他事情就跳過KB檢查.
 
 ```
-/home/it/git/ai/clean-infra-kb/
+$HOME/git/ai/clean-infra-kb/
 ```
 
 - `kb.sh` — 環境解析 CLI / library(`list`、`resolve`、`projects`、`shared`、`validate`)
