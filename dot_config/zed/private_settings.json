@@ -1,0 +1,313 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "markdown_preview": {
+    "font_size": 15.0
+  },
+  "agent_ui_font_size": 16.0,
+  "agent_buffer_font_size": 16.0,
+  "session": {
+    "trust_all_worktrees": true
+  },
+  "cli_default_open_behavior": "existing_window",
+  "buffer_font_family": "VictorMono Nerd Font",
+  "ssh_connections": [
+    {
+      "host": "localhost",
+      "username": "it",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/home/it/git"
+          ]
+        },
+        {
+          "paths": [
+            "/home/it/git/ai"
+          ]
+        },
+        {
+          "paths": [
+            "/home/it/git/ai-team/aics"
+          ]
+        },
+        {
+          "paths": [
+            "/home/it/git/ai-team/online808-ai"
+          ]
+        },
+        {
+          "paths": [
+            "/home/it/git/ai-team/online808-ai-flow-editor"
+          ]
+        },
+        {
+          "paths": [
+            "/home/it/git/ai/clean-infra-kb"
+          ]
+        },
+        {
+          "paths": [
+            "/home/it/git/ai/slack_bot_gemini"
+          ]
+        },
+        {
+          "paths": [
+            "/home/it/git/bu03/bu03"
+          ]
+        },
+        {
+          "paths": [
+            "/home/it/git/online808"
+          ]
+        },
+        {
+          "paths": [
+            "/home/it/git/other/iac"
+          ]
+        },
+        {
+          "paths": [
+            "/home/it/git/other/release"
+          ]
+        },
+        {
+          "paths": [
+            "/home/it/git/other/runner/./"
+          ]
+        },
+        {
+          "paths": [
+            "/home/it/git/other/yileit/./"
+          ]
+        },
+        {
+          "paths": [
+            "/home/it/mygit/3k"
+          ]
+        }
+      ],
+      "nickname": "ssh-wsl-it"
+    },
+    {
+      "host": "wsl-tom",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/home/tom/work-yile"
+          ]
+        }
+      ],
+      "nickname": "ssh-wsl-tom"
+    },
+    {
+      "host": "mywork",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/home/tom/git"
+          ]
+        },
+        {
+          "paths": [
+            "/home/tom/git/online808"
+          ]
+        }
+      ]
+    }
+  ],
+  "agent_servers": {
+    "hermes-agent": {
+      "default_mode": "dont_ask",
+      "type": "custom",
+      "command": "hermes",
+      "args": ["acp"]
+    },
+    "pi-acp": {
+      "favorite_config_option_values": {
+        "model": [
+          "myyy/grok-4.6",
+          "myyy/gpt-5.6-sol",
+          "myyy/claude-opus-5",
+          "myyy/gemini-3.7-flash-high"
+        ]
+      },
+      "type": "registry"
+    },
+    "opencode": {
+      "favorite_config_option_values": {
+        "model": [
+          "myyy/claude-opus-4-8",
+          "myyy/claude-sonnet-5",
+          "myyy/gpt-5.6-luna",
+          "myyy/gpt-5.6-terra",
+          "myyy/gpt-5.6-slo",
+          "myyy/gemini-3.5-flash-low",
+          "myyy/gpt-5.5",
+          "myyy/gemini-3.1-pro-low",
+          "myyy/claude-fable-5",
+          "myprovider/gpt-5.6-terra",
+          "myprovider/claude-opus-5",
+          "myprovider/grok-4.6",
+          "opencode/x-preview-f-free",
+          "myprovider/gpt-6-astra(max)",
+          "myprovider/gpt-6-astra",
+          "openai/gpt-6-astra",
+          "myprovider/grok-4.7(max)",
+          "myprovider/claude-opus-5.5(max)",
+          "myprovider/gpt-5.6-sol(max)",
+          "myprovider/claude-opus-5-5(max)",
+          "myprovider/claude-sonnet-5-5(max)",
+          "myprovider/gpt-6.1-sol(max)"
+        ]
+      },
+      "type": "registry",
+      "default_config_options": {
+        "effort": "max",
+        "mode": "build",
+        "model": "myprovider/gpt-6-astra(max)"
+      }
+    }
+  },
+  "language_models": {
+    "openai_compatible": {
+      "myyy": {
+        "api_url": "http://localhost:8317/v1",
+        "available_models": [
+          {
+            "name": "claude-fable-5",
+            "max_tokens": 200000,
+            "max_output_tokens": 32000,
+            "max_completion_tokens": 200000,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false,
+              "chat_completions": true,
+              "interleaved_reasoning": false,
+              "max_tokens_parameter": false
+            }
+          },
+          {
+            "name": "gpt-5.6-luna",
+            "max_tokens": 200000,
+            "max_output_tokens": 32000,
+            "max_completion_tokens": 200000,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false,
+              "chat_completions": true,
+              "interleaved_reasoning": false,
+              "max_tokens_parameter": false
+            }
+          },
+          {
+            "name": "gpt-5.6-terra",
+            "max_tokens": 200000,
+            "max_output_tokens": 32000,
+            "max_completion_tokens": 200000,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false,
+              "chat_completions": true,
+              "interleaved_reasoning": false,
+              "max_tokens_parameter": false
+            }
+          },
+          {
+            "name": "gpt-5.6-sol",
+            "max_tokens": 200000,
+            "max_output_tokens": 32000,
+            "max_completion_tokens": 200000,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false,
+              "chat_completions": true,
+              "interleaved_reasoning": false,
+              "max_tokens_parameter": false
+            }
+          },
+          {
+            "name": "claude-sonnet-5",
+            "max_tokens": 200000,
+            "max_output_tokens": 32000,
+            "max_completion_tokens": 200000,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false,
+              "chat_completions": true,
+              "interleaved_reasoning": false,
+              "max_tokens_parameter": false
+            }
+          },
+          {
+            "name": "gemini-3.5-flash-low",
+            "max_tokens": 200000,
+            "max_output_tokens": 32000,
+            "max_completion_tokens": 200000,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false,
+              "chat_completions": true,
+              "interleaved_reasoning": false,
+              "max_tokens_parameter": false
+            }
+          }
+        ]
+      }
+    }
+  },
+  "agent": {
+    "threads_sidebar": {
+      "position": "right"
+    },
+    "flexible": true,
+    "button": true,
+    "message_editor_min_lines": 4,
+    "expand_terminal_card": true,
+    "single_file_review": true,
+    "play_sound_when_agent_done": "always",
+    "notify_when_agent_waiting": "all_screens",
+    "default_model": {
+      "provider": "myyy",
+      "model": "claude-opus-5",
+      "enable_thinking": false
+    },
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "project_panel": {
+    "dock": "left"
+  },
+  "wsl_connections": [
+    {
+      "distro_name": "arch",
+      "user": null,
+      "projects": []
+    }
+  ],
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": "One Light",
+}
