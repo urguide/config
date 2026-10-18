@@ -1,5 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "model": "myprovider/gpt-6-astra(max)",
   "permission": {
     "external_directory": {
       "~": "allow",
@@ -88,8 +89,8 @@
     }
   },
   "agent": {
-    "explore": { "model": "mymymy/grok-4.7" },
-    "general": { "model": "mymymy/grok-4.7" }
+    "explore": { "model": "myprovider/grok-4.7(max)" },
+    "general": { "model": "myprovider/grok-4.7(max)" }
   },
   "mcp": {
     "blender": {
