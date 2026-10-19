@@ -95,11 +95,34 @@ export EDITOR="vim"
 export VISUAL="vim"
 
 it() {
-  tmux set -p @myTitle "  IT  " &&
-    sudo -H \
-      --preserve-env=DISPLAY,WAYLAND_DISPLAY,PULSE_SERVER \
-      -u it \
-      sh -c 'cd "$HOME" && exec "$SHELL"'
+  local pane="${TMUX_PANE:-}"
+  local old_title had_title=0 status=0
+
+  if [[ -z $pane ]]; then
+    echo "請在 tmux 中執行 it" >&2
+    return 1
+  fi
+
+  # 記住原本的 pane 設定，區分「未設定」與「空字串」。
+  if old_title=$(tmux show-option -pv -t "$pane" @myTitle 2>/dev/null); then
+    had_title=1
+  fi
+
+  tmux set-option -p -t "$pane" @myTitle "  IT  " || return
+
+  sudo -H \
+    --preserve-env=DISPLAY,WAYLAND_DISPLAY,PULSE_SERVER \
+    -u it \
+    sh -c 'cd "$HOME" && exec "$SHELL"' || status=$?
+
+  # 離開 it 後，還原原值或移除暫時設定。
+  if (( had_title )); then
+    tmux set-option -p -t "$pane" @myTitle "$old_title"
+  else
+    tmux set-option -pu -t "$pane" @myTitle
+  fi
+
+  return "$status"
 }
 
 PODMAN_USERNS=auto    ####讓podman自動用不同的user id跑container
@@ -428,5 +451,4 @@ export PATH="${HOME}/.local/bin:$PATH"
 # 4. ble.sh attach(必須在最後)
 # ============================================
 [[ ${BLE_VERSION-} ]] && ble-attach
-
 
