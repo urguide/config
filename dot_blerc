@@ -64,3 +64,7 @@ bleopt history_erasedups_limit=2000
 # 開啟後補全的候選產生、glob、共同前綴、選單過濾都會忽略大小寫
 # 注意：必須用 bind (ble.sh 覆寫的 wrapper)，用 builtin bind 無效
 bind 'set completion-ignore-case on'
+
+## 多行直接enter就執行
+ble-bind -m emacs -f 'C-m' 'accept-line'
+ble-bind -m emacs -f 'RET' 'accept-line'
