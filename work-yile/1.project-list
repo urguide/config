@@ -2,7 +2,6 @@
 1 qa1
 2 qa2 jumbo-slotrek-qa asia-east1 qa2 http://qa2-wg.yile808.com:8080
 3 qa3 jumbo-slotrek-qa asia-east1-a qa3 http://qa3-wg.yile808.com:8080
-4 qa3-2 jumbo-slotrek-qa asia-east1-a qa3 http://testvpn.yile808.com:8080
 5 stage yile-cg001-stage asia-east1 cg001-stage http://stage-wg.yile808.com:8080
 6 marketing marketing-468706 	asia-east1-a marketing
 8 Pro-tw jumbo-production1 asia-east1 cg001-pro http://g1-wg.yile808.com:8080
