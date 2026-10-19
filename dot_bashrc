@@ -8,7 +8,13 @@
 # ============================================
 # 1. ble.sh 載入(必須在最開頭,但先不 attach)
 # ============================================
-[[ $- == *i* ]] && source /usr/share/blesh/ble.sh --noattach --rcfile "$HOME/.blerc"
+if [[ $- == *i* ]]; then
+    if [[ -f "$HOME/.local/share/blesh/ble.sh" ]]; then
+        source "$HOME/.local/share/blesh/ble.sh" --noattach --rcfile "$HOME/.blerc"
+    elif [[ -f /usr/share/blesh/ble.sh ]]; then
+        source /usr/share/blesh/ble.sh --noattach --rcfile "$HOME/.blerc"
+    fi
+fi
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -452,4 +458,3 @@ export PATH="${HOME}/.local/bin:$PATH"
 # 4. ble.sh attach(必須在最後)
 # ============================================
 [[ ${BLE_VERSION-} ]] && ble-attach
-
