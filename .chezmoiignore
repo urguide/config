@@ -1,12 +1,9 @@
-{{/* Trusted accounts that may receive secrets. Defined once so the two
-     guards below can never drift apart. */}}
+{{/* Accounts that receive personal settings. */}}
 {{- $trusted := has .chezmoi.username (list "tom" "tomchi") -}}
 
 # ===== Windows: ignore everything, then whitelist =====
 # Note: "dir/**" also matches "dir" itself, and once a directory is ignored
 # chezmoi does not descend into it, so every wanted parent must be un-ignored.
-# Note: "!" excludes are global and beat ALL ignores regardless of order,
-# so the secret whitelist below must stay inside the username guard.
 {{ if eq .chezmoi.os "windows" }}
 *
 **
@@ -18,14 +15,6 @@
 !Documents
 !Documents/WindowsPowerShell
 !Documents/WindowsPowerShell/**
-{{ if $trusted }}
-!.ssh
-!.ssh/config
-!.git-credentials
-!.config
-!.config/rclone
-!.config/rclone/rclone.conf
-{{ end }}
 {{ else }}
 AppData
 AppData/**
@@ -41,9 +30,12 @@ Documents/**
 .config/starship.toml
 .config/systemd
 .config/rclone
-.config/mykey.env.age
-.git-credentials.age
 .myshellrc
-.ssh/config.age
 .tmux.conf
 {{ end }}
+
+# Managed by the separate config-en repository (target paths).
+.config/mykey.env
+.config/rclone/rclone.conf
+.ssh/config
+.git-credentials
