@@ -69,8 +69,13 @@
         "kimi-k3(max)": {
           "name": "kimi-k3(max)"
         },
-        "gemini-3.8-flash-high": {
-          "name": "gemini-flash-high"
+        "gemini-4-argon-high": {
+          "name": "gemini",
+          "attachment": true,
+          "modalities": {
+                "input": ["text", "image"],
+                "output": ["text"]
+          }
         }
       }
     },
