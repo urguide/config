@@ -39,3 +39,6 @@ Documents/**
 .config/rclone/rclone.conf
 .ssh/config
 .git-credentials
+.cli-proxy-api/config.yaml
+.pi/agent/models.json
+podman/searxng/settings.yml
