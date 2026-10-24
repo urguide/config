@@ -42,3 +42,4 @@ Documents/**
 .cli-proxy-api/config.yaml
 .pi/agent/models.json
 podman/searxng/settings.yml
+.config/systemd/user/rclone-google-yile*.service
