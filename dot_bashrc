@@ -413,36 +413,29 @@ eval "$(atuin init bash --disable-up-arrow)"   ##也要放在ble中間
 ##starship
 eval "$(starship init bash)"
 
-## 開啟ssh-agent
-#if [ -z "$SSH_AUTH_SOCK" ]; then
-#   eval "$(ssh-agent -s)" > /dev/null
-#fi
-if [[ -n ${TMUX:-} ]]; then
-    (
-        # 避免多個 window 同時建立 agent
-        tmux wait-for -L bashrc-ssh-agent || exit
-        trap 'tmux wait-for -U bashrc-ssh-agent' EXIT
+# 同一台主機、同一帳號的 Bash 共用 ssh-agent
+export SSH_AUTH_SOCK="$HOME/.ssh/agent/agent.sock"
+unset SSH_AGENT_PID
 
-        # 優先使用 tmux 保存的 agent
-        agent_env=$(tmux show-environment -g SSH_AUTH_SOCK 2>/dev/null)
-        if [[ $agent_env == SSH_AUTH_SOCK=* ]]; then
-            export "$agent_env"
-        fi
+(
+    umask 077
+    mkdir -p "$HOME/.ssh/agent" || exit
+    chmod 700 "$HOME/.ssh/agent" || exit
 
-        # 0：有金鑰；1：沒有金鑰；2：無法連線
-        agent_status=0
-        ssh-add -l >/dev/null 2>&1 || agent_status=$?
+    # 避免多個 shell 同時啟動 agent
+    exec 9>"$HOME/.ssh/agent/agent.lock" || exit
+    flock -x 9 || exit
 
-        if (( agent_status > 1 )); then
-            eval "$(ssh-agent -s)" >/dev/null
-        fi
+    # 0：有金鑰；1：沒有金鑰；2：無法連線
+    agent_status=0
+    ssh-add -l >/dev/null 2>&1 || agent_status=$?
 
-        tmux set-environment -g SSH_AUTH_SOCK "$SSH_AUTH_SOCK"
-    )
-
-    # 套用到目前 window 的 shell
-    export "$(tmux show-environment -g SSH_AUTH_SOCK)"
-fi
+    if (( agent_status > 1 )); then
+        # 清除失效的 socket，再用相同路徑啟動 agent
+        rm -f -- "$SSH_AUTH_SOCK" || exit
+        ssh-agent -a "$SSH_AUTH_SOCK" -s 9>&- >/dev/null
+    fi
+)
 
 ##hermes 輸入中文 + 正常顯示
 export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u)/bus"
