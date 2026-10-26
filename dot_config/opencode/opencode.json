@@ -96,6 +96,27 @@
       }
     }
   },
+  "providers": {
+    "proxy-pools": {
+      "name": "CLIProxy 模型池",
+      "package": "@opencode/ai/providers/openai-compatible",
+      "settings": {
+        "baseURL": "http://127.0.0.1:8317/v1",
+        "apiKey": "{env:MY_CLI_PROXY_KEY}"
+      },
+      "models": {
+        "antigravity-pool": {
+          "name": "Antigravity Pool（2 模型）"
+        },
+        "all-pool": {
+          "name": "All Pool（5 模型）"
+        },
+        "native-pool": {
+          "name": "Native Pool（4 模型）"
+        }
+      }
+    }
+  },
   "agent": {
     "explore": { "model": "myprovider/grok-4.7(max)" },
     "general": { "model": "myprovider/grok-4.7(max)" }
