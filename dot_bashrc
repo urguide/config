@@ -454,4 +454,10 @@ export PATH="${HOME}/.local/bin:$PATH"
 # ============================================
 # 4. ble.sh attach(必須在最後)
 # ============================================
-[[ ${BLE_VERSION-} ]] && ble-attach
+if [[ ${BLE_VERSION-} ]]; then
+    if [[ -n ${ORCA_TERMINAL_HANDLE-} ]] && declare -F ble/base/install-prompt-attach >/dev/null; then
+        ble/base/install-prompt-attach
+    else
+        ble-attach
+    fi
+fi
