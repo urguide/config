@@ -8,6 +8,12 @@
     "mode": "dark"
   },
   "animations": false,
+  "keybinds": {
+    "session.first": "ctrl+g,alt+home",
+    "session.last": "ctrl+alt+g",
+    "input.buffer.home": "home",
+    "input.buffer.end": "end"
+  },
   "terminal": {
     "copy": "select"
   },
