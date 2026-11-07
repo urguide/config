@@ -97,6 +97,9 @@ alias oc='opencode --continue'
 alias cpa='cli-proxy-api'
 alias cpar='systemctl --user restart cli-proxy-api'
 alias cpau='/home/tom/work-yile/cp_to_usr_bin.sh cpa'
+alias aoff='pactl set-card-profile alsa_card.usb-DENAFRIPS_DENAFRIPS_USB_HiRes_Audio-00 off'
+alias aon='pactl set-card-profile alsa_card.usb-DENAFRIPS_DENAFRIPS_USB_HiRes_Audio-00 output:analog-stereo'
+
 #alias it='tmux set -p @myTitle "  IT  " && sudo -H \
 #       --chdir=/home/it \
 #       --preserve-env=DISPLAY,WAYLAND_DISPLAY,PULSE_SERVER \
