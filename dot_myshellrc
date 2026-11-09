@@ -1,5 +1,5 @@
 
 
 # WSL: no interop, so "open a browser" copies the URL to the Windows clipboard instead
-export BROWSER="google-chrome-stable"
+#export BROWSER="google-chrome-stable"
 #export BROWSER="$HOME/.local/bin/wsl-browser"
