@@ -68,6 +68,11 @@
           "capabilities": { "tools": true, "input": ["text", "image"], "output": ["text"] },
           "limit": { "context": 1000000, "output": 128000 }
         },
+        "claude-mythos-5-2(max)": {
+          "name": "mythos(max)",
+          "capabilities": { "tools": true, "input": ["text", "image"], "output": ["text"] },
+          "limit": { "context": 1000000, "output": 128000 }
+        },
         "kimi-k3(max)": {
           "name": "kimi-k3(max)",
           "capabilities": { "tools": true, "input": ["text", "image"], "output": ["text"] },
