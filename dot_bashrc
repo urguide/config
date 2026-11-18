@@ -466,3 +466,4 @@ if [[ ${BLE_VERSION-} ]]; then
         ble-attach
     fi
 fi
+. "$HOME/.cargo/env"
