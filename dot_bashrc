@@ -105,7 +105,8 @@ alias aon='pactl set-card-profile alsa_card.usb-DENAFRIPS_DENAFRIPS_USB_HiRes_Au
 #       --preserve-env=DISPLAY,WAYLAND_DISPLAY,PULSE_SERVER \
 #       -u it \
 #       $SHELL'
-alias vp='tmux set -p @myTitle "  VP  " && sudo su - vp'
+
+# alias vp='tmux set -p @myTitle "  VP  " && sudo su - vp'
 
 export EDITOR="vim"
 export VISUAL="vim"
@@ -129,6 +130,38 @@ it() {
   sudo -H \
     --preserve-env=DISPLAY,WAYLAND_DISPLAY,PULSE_SERVER \
     -u it \
+    sh -c 'cd "$HOME" && exec "$SHELL"' || status=$?
+
+  # 離開 it 後，還原原值或移除暫時設定。
+  if (( had_title )); then
+    tmux set-option -p -t "$pane" @myTitle "$old_title"
+  else
+    tmux set-option -pu -t "$pane" @myTitle
+  fi
+
+  return "$status"
+}
+
+
+vp() {
+  local pane="${TMUX_PANE:-}"
+  local old_title had_title=0 status=0
+
+  if [[ -z $pane ]]; then
+    echo "請在 tmux 中執行 it" >&2
+    return 1
+  fi
+
+  # 記住原本的 pane 設定，區分「未設定」與「空字串」。
+  if old_title=$(tmux show-option -pv -t "$pane" @myTitle 2>/dev/null); then
+    had_title=1
+  fi
+
+  tmux set-option -p -t "$pane" @myTitle "  VP  " || return
+
+  sudo -H \
+    --preserve-env=DISPLAY,WAYLAND_DISPLAY,PULSE_SERVER \
+    -u vp \
     sh -c 'cd "$HOME" && exec "$SHELL"' || status=$?
 
   # 離開 it 後，還原原值或移除暫時設定。
