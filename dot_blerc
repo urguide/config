@@ -65,6 +65,14 @@ bleopt history_erasedups_limit=2000
 # 注意：必須用 bind (ble.sh 覆寫的 wrapper)，用 builtin bind 無效
 bind 'set completion-ignore-case on'
 
-## 多行直接enter就執行
-ble-bind -m emacs -f 'C-m' 'accept-line'
-ble-bind -m emacs -f 'RET' 'accept-line'
+# Enter：完整指令直接執行；heredoc 等未結束時繼續換行。
+function ble/widget/my/accept-complete-or-newline {
+  ble-edit/content/update-syntax
+  if ble/syntax:bash/is-complete; then
+    ble/widget/accept-line
+  else
+    ble/widget/newline
+  fi
+}
+ble-bind -m emacs -f 'C-m' my/accept-complete-or-newline
+ble-bind -m emacs -f 'RET' my/accept-complete-or-newline
